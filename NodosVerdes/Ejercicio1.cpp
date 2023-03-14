@@ -5,25 +5,31 @@
 // Ejercicio 1: Tener exactamente 3 nietos
 
 template <typename T>
-int numNietosNodo(typename Abin<T>::nodo n, Abin<T>& A){
+int numNietosNodo(typename Abin<T>::nodo n, Abin<T>& A)
+{
     int contador = 0;
-    if(A.hijoIzqdo(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoIzqdo(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoIzqdo(A.hijoDrcho(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoIzqdo(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoDrcho(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoDrcho(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoDrcho(A.hijoDrcho(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoDrcho(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
     return contador;
 }
 
 template <typename T>
-int tresNietosRec(typename Abin<T>::nodo n, Abin<T>& A){
+int tresNietosRec(typename Abin<T>::nodo n, Abin<T>& A)
+{
     if(n == Abin<T>::NODO_NULO)
     {
         return 0;
@@ -36,7 +42,10 @@ int tresNietosRec(typename Abin<T>::nodo n, Abin<T>& A){
             return 1 + tresNietosRec(A.hijoIzqdo(n),A) + tresNietosRec(A.hijoDrcho(n),A);
         }
     }
-    return tresNietosRec(A.hijoIzqdo(n),A) + tresNietosRec(A.hijoDrcho(n),A);
+    else
+    {
+        return tresNietosRec(A.hijoIzqdo(n),A) + tresNietosRec(A.hijoDrcho(n),A);
+    }
 }
 
 template <typename T>

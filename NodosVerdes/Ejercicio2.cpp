@@ -5,37 +5,47 @@
 // Ejercicio 2: Tener el  doble de nietos que de bisnietos
 
 template <typename T>
-int numNietosNodo(typename Abin<T>::nodo n, Abin<T>& A){
+int numNietosNodo(typename Abin<T>::nodo n, Abin<T>& A)
+{
     int contador = 0;
-    if(A.hijoIzqdo(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoIzqdo(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoIzqdo(A.hijoDrcho(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoIzqdo(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoDrcho(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoDrcho(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
-    if(A.hijoDrcho(A.hijoDrcho(n)) != Abin<T>::NODO_NULO){
+    if(A.hijoDrcho(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
+    {
         contador++;
     }
     return contador;
 }
 
 template <typename T>
-int numBisnietosNodo(typename Abin<T>::nodo n, Abin<T>& A){
+int numBisnietosNodo(typename Abin<T>::nodo n, Abin<T>& A)
+{
     int contador = 0;
-    if(A.hijoIzqdo(n) != Abin<T>::NODO_NULO){
+    if(A.hijoIzqdo(n) != Abin<T>::NODO_NULO)
+    {
         contador += numNietosNodo(A.hijoIzqdo(n), A);
     }
-    if(A.hijoDrcho(n) != Abin<T>::NODO_NULO){
+    if(A.hijoDrcho(n) != Abin<T>::NODO_NULO)
+    {
         contador += numNietosNodo(A.hijoDrcho(n), A);
     }
     return contador;
 }
 
 template <typename T>
-int dobleBisnietosRec(typename Abin<T>::nodo n, Abin<T>& A){
+int dobleBisnietosRec(typename Abin<T>::nodo n, Abin<T>& A)
+
+{
     if(n == Abin<T>::NODO_NULO)
     {
         return 0;
