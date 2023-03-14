@@ -2,6 +2,7 @@
 #define ABIN_H
 #include <cassert>
 
+// Hacer una documentación extensa de este código
 template <typename T>
 class Abin
 {
@@ -9,18 +10,23 @@ class Abin
 public:
     typedef celda *nodo;
     static const nodo NODO_NULO;
-    Abin(); // Constructorvoid insertarRaiz(const T& e);
+    Abin(); // Constructor
+    void insertarRaiz(const T& e);
     void insertarHijoIzqdo(nodo n, const T &e);
     void insertarHijoDrcho(nodo n, const T &e);
     void eliminarHijoIzqdo(nodo n);
     void eliminarHijoDrcho(nodo n);
     void eliminarRaiz();
     bool arbolVacio() const;
-    const T &elemento(nodo n) const; // Lec. en Abin constT& elemento(nodo n); // Lec/Esc. en Abin no-constnodo raiz() const;
+    const T &elemento(nodo n) const; // Lec. en Abin
+    const T& elemento(nodo n); // Lec/Esc. en Abin no-const
+    nodo raiz() const;
     nodo padre(nodo n) const;
     nodo hijoIzqdo(nodo n) const;
     nodo hijoDrcho(nodo n) const;
-    Abin(const Abin<T> &a); // Ctor. de copiaAbin<T>& operator =(const Abin<T>& A); // Asig. de árboles~Abin(); // Destructor
+    Abin(const Abin<T> &a); // Ctor. de copia
+    Abin<T>& operator =(const Abin<T>& A); // Asig. de árboles
+    ~Abin(); // Destructor
 private:
     struct celda
     {
@@ -38,7 +44,8 @@ private:
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(nullptr);
 
-/*--------------------------------------------------------*/ /* Métodos públicos */ /*--------------------------------------------------------*/ template <typename T>
+/*--------------------------------------------------------*/ /* Métodos públicos */ /*--------------------------------------------------------*/
+template <typename T>
 inline Abin<T>::Abin() : r(NODO_NULO) {}
 
 template <typename T>
@@ -53,6 +60,20 @@ inline void Abin<T>::insertarHijoIzqdo(nodo n, const T &e)
 {
     assert(n != NODO_NULO);
     assert(n->hizq == NODO_NULO); // No existe hijo izqdo.n->hizq = new celda(e, n);
+}
+
+template <typename T>
+inline void Abin<T>::insertarHijoDrcho(nodo n, const T& e){
+    assert(n != NODO_NULO);
+    assert(n->hder == NODO_NULO); // No existe hijo drcho.n->hder = new celda(e, n);
+}
+template <typename T>
+inline void Abin<T>::eliminarHijoIzqdo(nodo n)
+{
+    assert(n != NODO_NULO);
+    assert(n->hizq != NODO_NULO); // Existe hijo izqdo.assert(n->hizq->hizq == NODO_NULO && // Hijo izqdo. n->hizq->hder == NODO_NULO); // es hoja.
+    delete n->hizq;
+    n->hizq = NODO_NULO;
 }
 
 template <typename T>
@@ -85,7 +106,7 @@ inline const T &Abin<T>::elemento(nodo n) const
 }
 
 template <typename T>
-inline T &Abin<T>::elemento(nodo n)
+inline const T& Abin<T>::elemento(nodo n)
 {
     assert(n != NODO_NULO);
     return n->elto;
@@ -146,7 +167,8 @@ inline Abin<T>::~Abin()
 {
     destruirNodos(r); // Vaciar el árbol.
 }
-/*--------------------------------------------------------*/ /* Métodos privados */ /*--------------------------------------------------------*/ // Destruye un nodo y todos sus descendientes
+/*--------------------------------------------------------*/ /* Métodos privados */ /*--------------------------------------------------------*/
+// Destruye un nodo y todos sus descendientes
 template <typename T>
 void Abin<T>::destruirNodos(nodo &n)
 {
@@ -159,7 +181,8 @@ void Abin<T>::destruirNodos(nodo &n)
     }
 }
 
-// Devuelve una copia de un nodo y todos sus descendientestemplate <typename T>
+// Devuelve una copia de un nodo y todos sus descendientes
+template <typename T>
 typename Abin<T>::nodo Abin<T>::copiar(nodo n)
 {
     nodo m = NODO_NULO;
