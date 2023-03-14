@@ -2,7 +2,6 @@
 #define ABIN_H
 #include <cassert>
 
-// Hacer una documentación extensa de este código
 template <typename T>
 class Abin
 {
