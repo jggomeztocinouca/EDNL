@@ -6,10 +6,17 @@
 // Los operadores binarios posibles en la expresión aritmética serán suma, resta, multiplicación y división
 
 #include "../Abin/AbinCeldasEnlazadas.h"
+
+typedef struct { // Alternativa a "atoi"
+    char operador;
+    char operando;
+}registro ;
+
 template<typename T>
-int calculo_Rec(const typename Abin<T>::nodo n, const Abin<T>& A)
+int evaluacionArbol_Rec(const typename Abin<T>::nodo n, const Abin<T>& A)
 {
     if (A.hijoIzquierdo(n) == Abin<T>::NODO_NULO && A.hijoDerecho(n) == Abin<T>::NODO_NULO){
+        // Con comprobar el izquierdo, bastaría (un nodo hoja es un nodo que no tiene NINGÚN hijo)
         return atoi(A.elemento(n)); // Nodo hoja, contiene operando
     }
     else
@@ -32,7 +39,7 @@ int calculo_Rec(const typename Abin<T>::nodo n, const Abin<T>& A)
 
 
 template<typename T>
-int calculo(const Abin<T>& A)
+int evaluacionArbol(const Abin<T>& A)
 {
-    return calculo_Rec(A.raiz(), A);
+    return evaluacionArbol_Rec(A.raiz(), A);
 }
