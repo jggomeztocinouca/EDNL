@@ -21,7 +21,8 @@ int profundidadNodo(typename Abin<T>::nodo n, Abin<T>& A)
 template <typename T>
 int numAntecesoresPropiosNodo(typename Abin<T>::nodo n, Abin<T>& A)
 {
-    return profundidadRec(n, A) + 1;
+    //return profundidadNodo(n, A) + 1; No es necesario un +1, por definición, un antecesor propio es un ancestro, distinto de sí mismo.
+    return profundidadNodo(n, A);
 }
 
 template <typename T>
