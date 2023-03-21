@@ -15,13 +15,24 @@ int gradoRec(const typename Agen<T>::nodo n, const Agen<T>& A)
     }
     else
     {
-        typename Agen<T>::nodo h = A.hijoIzqdo(n);
-        int contador = 0;
-        while(h != Agen<T>::NODO_NULO)
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int grado = 0;
+        while(hijo != Agen<T>::NODO_NULO)
         {
-            contador++;
-            h = A.hermDrcho(h);
+            hijo = A.hermDrcho(n);
+            grado++;
         }
-        return max(contador,max(gradoRec(A.hijoIzqdo(n),A), gradoRec(A.hermDrcho(n),A)));
+        hijo = A.hijoIzqdo(n);
+        while(hijo != Agen<T>::NODO_NULO)
+        {
+            grado = max(grado, gradoRec(n));
+            hijo = A.hermDrcho(n);
+        }
+        return grado;
     }
+}
+
+template <typename T>
+int grado(const Agen<T>& A){
+    return gradoRec(A.raiz(),A);
 }

@@ -7,15 +7,43 @@
 
 template <typename T>
 int alturaNodoRec(const typename Agen<T>::nodo n, const Agen<T>& A){
-    if(n == Agen<T>::NODO_NULO) {
-        return -1;
+    if(n == Agen<T>::NODO_NULO)
+    {
+        return -1; // Altura de NODO_NULO
     }
     else
     {
-        return 1 + std::max(alturaNodoRec(A.hijoIzqdo(n), A), alturaNodoRec(A.hermDrcho(n), A));
+        int altura = -1;
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        while(hijo != Agen<T>::NODO_NULO)
+        {
+            altura = max(altura, alturaNodoRec(hijo,A));
+            hijo = A.hermDrcho(n);
+        }
+        return 1 + altura;
     }
 }
 
+template <typename T>
+int alturaMinRec(const typename Agen<T>::nodo n, const Agen<T>& A){
+    if(n == Agen<T>::NODO_NULO)
+    {
+        return -1; // Altura de NODO_NULO
+    }
+    else
+    {
+        int alturaMin = 0; // La altura mínima de todas las hojas es 0
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        while(hijo != Agen<T>::NODO_NULO)
+        {
+            alturaMin = std::min(alturaMin, alturaMinRec(hijo,A));
+            hijo = A.hermDrcho(n);
+        }
+        return 1 + alturaMin;
+    }
+}
+
+// Desequilibrio 0, 1 y 2 nivel = 0
 template<typename T>
 int desequilibrioRec(const typename Agen<T>::nodo n,  const Agen<T>& A)
 {
