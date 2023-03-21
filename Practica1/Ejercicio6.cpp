@@ -10,7 +10,8 @@ template <typename T>
 int desiquilibrioRec(const Abin<T>& A, const typename Abin<T>::nodo n)
 {
     if (n == Abin<T>::NODO_NULO){
-        return -1; // Aunque es correcto, por definición el desequilibrio de un nodo_nulo es 0
+        //return -1; // Aunque es correcto, por definición el desequilibrio de un nodo_nulo es 0
+        return 0;
     }
     else {
         int diferencia = std::abs(alturaRec(A, A.hijoIzquierdo(n)) - alturaRec(A, A.hijoDerecho(n)));
