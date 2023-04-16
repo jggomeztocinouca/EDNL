@@ -6,7 +6,7 @@
  * Implementa una operación de orden logarítmico para añadir un elemento a un montículo min-max almacenado en un vector de posiciones relativas
  */
 
-#include "../Apo/apo.cpp"
+#include "../Apo/Apo.hpp"
 #include <math.h>
 
 template<typename T>
