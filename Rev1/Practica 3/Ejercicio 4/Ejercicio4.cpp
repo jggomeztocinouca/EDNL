@@ -14,7 +14,7 @@ typename Agen<int>::nodo busquedaNodoRec(const typename Agen<int>::nodo& n, int 
     {
         typename Agen<int>::nodo nodoBuscar = Agen<int>::NODO_NULO;
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
-        while(hijo != Agen<int>::NODO_NULO)
+        while(hijo != Agen<int>::NODO_NULO && nodoBuscar == Agen<int>::NODO_NULO)
         {
             nodoBuscar = busquedaNodoRec(hijo, x, A);
             hijo = A.hermDrcho(n);
