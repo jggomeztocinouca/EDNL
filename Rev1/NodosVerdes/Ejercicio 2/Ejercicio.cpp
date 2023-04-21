@@ -1,30 +1,33 @@
 #include "../Abin/AbinCeldasEnlazadas.h"
 
-// PRELUDIO: Contar el número de nodos de un árbol binario que cumplen la condición:
-
-// Ejercicio 2: Tener el doble de nietos que de bisnietos
-
 template <typename T>
 int numNietosNodo(typename Abin<T>::nodo n, Abin<T>& A)
 {
     int contador = 0;
 
-    if(A.hijoIzqdo(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
+    typename Abin<T>::nodo hijoIzqdo = A.hijoIzqdo(n);
+    typename Abin<T>::nodo hijoDrcho = A.hijoDrcho(n);
+    if(hijoIzqdo != Abin<T>::NODO_NULO)
     {
-        contador++;
+        if(A.hijoIzqdo(hijoIzqdo) != Abin<T>::NODO_NULO){
+            contador++;
+        }
+
+
+        if(A.hijoDrcho(hijoIzqdo) != Abin<T>::NODO_NULO) {
+            contador++;
+        }
     }
-    if(A.hijoIzqdo(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
-    {
-        contador++;
+
+    if(hijoDrcho != Abin<T>::NODO_NULO) {
+        if (A.hijoIzqdo(hijoDrcho) != Abin<T>::NODO_NULO) {
+            contador++;
+        }
+        if (A.hijoDrcho(hijoDrcho) != Abin<T>::NODO_NULO) {
+            contador++;
+        }
     }
-    if(A.hijoDrcho(A.hijoIzqdo(n)) != Abin<T>::NODO_NULO)
-    {
-        contador++;
-    }
-    if(A.hijoDrcho(A.hijoDrcho(n)) != Abin<T>::NODO_NULO)
-    {
-        contador++;
-    }
+
     return contador;
 }
 
@@ -60,7 +63,6 @@ int dobleBisnietosRec(typename Abin<T>::nodo n, Abin<T>& A)
         return dobleBisnietosRec(A.hijoIzqdo(n), A) + dobleBisnietosRec(A.hijoDrcho(n), A);
     }
 }
-
 
 template <typename T>
 int dobleBisnietos(Abin<T>& A){

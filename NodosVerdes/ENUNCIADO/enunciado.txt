@@ -2,7 +2,7 @@ Contar el número de nodos de un árbol binario que cumplen las siguientes condi
 
 - Tener exactamente 3 nietos
 
-- Tener el  doble de nietos que de bisnietos
+- Tener el doble de nietos que de bisnietos
 
 - Ser nostálgicos. Definimos un nodo nostálgico como aquel que tiene más pasado que futuro, es decir son los nodos que tienen más antecesores propios que descendientes propios. 
 
