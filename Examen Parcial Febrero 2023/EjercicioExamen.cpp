@@ -25,8 +25,8 @@ bool similares(typename Agen<T>::nodo nA, typename Agen<T>::nodo nB, const Agen<
         while(hijoA != Agen<T>::NODO_NULO && hijoB != Agen<T>::NODO_NULO)
         {
             similares(hijoA, hijoB, A, B);
-            hijoA = A.hermDrcho(nA);
-            hijoB = B.hermDrcho(nB);
+            hijoA = A.hermDrcho(hijoA);
+            hijoB = B.hermDrcho(hijoB);
         }
         if(hijoA == Agen<T>::NODO_NULO && hijoB == Agen<T>::NODO_NULO)
         {
