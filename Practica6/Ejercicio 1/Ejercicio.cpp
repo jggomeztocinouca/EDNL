@@ -1,42 +1,22 @@
-#include "alg_grafoPMC.h"
+#include <alg_grafoPMC.h>
+
+/**
+ * @brief Algoritmo de Dijkstra Inverso \n
+ * Si el algoritmo de Dijkstra calcula los costes mínimos entre origen y todos los vértices,
+ * el algoritmo inverso calculará los costes mínimos entre un destino común y todos los vértices.
+ *
+ * @tparam tCoste Tipo de dato asociado al coste de los arcos.
+ * @param G Grafo ponderado. Asocia a cada vértice i del grafo una lista que almacena todos los vértices adyacentes a i.
+ * @param destino Nodo destino.
+ * @param P Vector de vértices tal que P[i] es el vértice anterior a i en el camino de coste mínimo desde origen hasta i.
+ * @return Costes mínimos entre un destino común y todos los vértices
+ */
 
 template <typename tCoste>
-vector<tCoste> DijkstraInv(const GrafoP<tCoste>& G,
-                        typename GrafoP<tCoste>::vertice destino,
-                        vector<typename GrafoP<tCoste>::vertice>& P)
+vector<tCoste> DijkstraInv(const GrafoP<tCoste>& G, typename GrafoP<tCoste>::vertice destino, vector<typename GrafoP<tCoste>::vertice>& P)
 {
-    typedef typename GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice; // Para ahorrarnos escribir typename GrafoP<tCoste>::vertice cada vez que queramos usarlo.
     vertice v, w;
-    const size_t n = G.numVert();
-    vector<bool> S(n, false);                  // Conjunto de vértices vacío.
-    vector<tCoste> D;                          // Costes mínimos desde destino.
+    const size_t n = G.numVert(); // Número de vertices en el grafo ponderado
 
-    // Iniciar D y P con caminos directos desde el vértice destino.
-    D = G[destino]; // Distancia directa desde cualquier origen al destino (existe arco --> coste, no existe arco --> infinito)
-    D[destino] = 0;                             // Coste destino-destino es 0.
-    P = vector<vertice>(n, destino);
-
-    // Calcular caminos de coste mínimo hasta cada vértice.
-    S[destino] = true;                          // Incluir vértice destino en S.
-    for (size_t i = 1; i <= n-2; i++) {
-        // Seleccionar vértice w no incluido en S
-        // con menor coste desde destino.
-        tCoste costeMin = GrafoP<tCoste>::INFINITO;
-        for (v = 0; v < n; v++)
-            if (!S[v] && D[v] <= costeMin) {
-                costeMin = D[v];
-                w = v;
-            }
-        S[w] = true;                          // Incluir vértice w en S.
-        // Recalcular coste hasta cada v no incluido en S a través de w.
-        for (v = 0; v < n; v++)
-            if (!S[v]) {
-                tCoste Owv = suma(G[v][w], D[w]); // coste origen hasta v pasando por w
-                if (Owv < D[v]) {
-                    D[v] = Owv;
-                    P[v] = w;
-                }
-            }
-    }
-    return D;
 }
