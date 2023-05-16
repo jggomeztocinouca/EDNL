@@ -7,37 +7,48 @@ using namespace std;
 enum alergeno{carretera, tren, avion};
 
 template<typename tCoste>
-set<typename GrafoP<tCoste>::vertice> ciudadesAlcanzables(const size_t presupuesto, const alergeno alergia, const typename GrafoP<tCoste>::vertice origen, const GrafoP<tCoste>& road, const GrafoP<tCoste>& train, const GrafoP<tCoste>& plane) {
-    set<typename GrafoP<tCoste>::vertice> ciudades;
-    auto nodos = road.numVert();
+vector<bool> ciudadesAlcanzables(const size_t presupuesto, const alergeno alergia, const typename GrafoP<tCoste>::vertice origen, const GrafoP<tCoste>& road, const GrafoP<tCoste>& train, const GrafoP<tCoste>& plane) {
+    typedef typename GrafoP<tCoste>::vertice vertice;
+    vector<bool> ciudades;
+    auto N = road.numVert();
 
-    if(alergia != carretera)
-    {
-        auto ciudadesCarretera = Dijkstra(road, origen, new vector<typename GrafoP<tCoste>::vertice>);
-        for(size_t i = 0; i < nodos; i++)
-        {
-            if(ciudadesCarretera[i] <= presupuesto && i != origen)
-                ciudades.insert(i);
-        }
+    const GrafoP<tCoste>* G1 = nullptr;
+    const GrafoP<tCoste>* G2 = nullptr;
 
-    }
-    if(alergia != tren)
+    switch(alergia)
     {
-        auto ciudadesTren = Dijkstra(train, origen, new vector<typename GrafoP<tCoste>::vertice>);
-        for(size_t i = 0; i < nodos; i++)
+        case carretera:
+            G1 = &road;
+            G2 = &train;
+            break;
+        case tren:
+            G1 = &train;
+            G2 = &plane;
+            break;
+        case avion:
+            G1 = &plane;
+            G2 = &road;
+            break;
+    }
+
+    GrafoP<tCoste> costesUnificados(N);
+    for(vertice i = 0; i < N; i++)
+    {
+        for(vertice j = 0; j < N; j++)
         {
-            if(ciudadesTren[i] <= presupuesto && i != origen)
-                ciudades.insert(i);
+            costesUnificados[i][j] = min((*G1)[i][j], (*G2)[i][j]);
         }
     }
-    if(alergia != avion)
+
+    vector<tCoste> costes = Dijkstra(costesUnificados, origen, new vector<vertice>);
+
+    for(vertice i = 0; i < N; i++)
     {
-        auto ciudadesAvion = Dijkstra(plane, origen, new vector<typename GrafoP<tCoste>::vertice>);
-        for(size_t i = 0; i < nodos; i++)
+        if(costes[i] <= presupuesto)
         {
-            if(ciudadesAvion[i] <= presupuesto && i != origen)
-                ciudades.insert(i);
+            ciudades[i] = true;
         }
     }
+
     return ciudades;
 }

@@ -3,6 +3,11 @@
 
 using namespace std;
 
+// djikstra bus
+// djikstra tren
+// dijkstrainv bus
+// dijkstrainv tren
+
 template<typename tCoste>
 tCoste tarifaMinima(typename GrafoP<tCoste>::vertice origen, typename GrafoP<tCoste>::vertice destino, const GrafoP<tCoste>& tren, const GrafoP<tCoste>& bus)
 {

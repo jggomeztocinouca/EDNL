@@ -15,7 +15,8 @@ tCoste rutaMinima(Lista<typename GrafoP<tCoste>::vertice>& ruta,
     tCoste costeMinimo;
     typename GrafoP<tCoste>::tCamino caminoOrigen;
     typename GrafoP<tCoste>::tCamino caminoDestino;
-    if(suma(costeOrigen[origen][cambio1],costeDestino[cambio1][destino]) < suma(costeOrigen[origen][cambio2],costeDestino[cambio2][destino]))
+    if( suma(costeOrigen[origen][cambio1],costeDestino[cambio1][destino]) <
+        suma(costeOrigen[origen][cambio2],costeDestino[cambio2][destino]))
     {
         costeMinimo = suma(costeOrigen[origen][cambio1],costeDestino[cambio1][destino]);
         caminoOrigen = camino<tCoste>(origen, cambio1, costeOrigen);
