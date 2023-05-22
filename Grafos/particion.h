@@ -12,11 +12,11 @@
 
 class Particion {
 public:
-   Particion(int n): padre(n, -1) {}
-   void unir(int a, int b);
-   int encontrar(int x) const;
+   Particion(unsigned int n): padre(n, -1) {}
+   void unir(unsigned int a, unsigned int b);
+   unsigned int encontrar(unsigned int x) const;
 private:
-   mutable std::vector<int> padre;
+   mutable std::vector<unsigned int> padre;
 };
 
 #endif   // PARTICION_H

@@ -9,7 +9,7 @@
 #include "particion.h"
 
 // El árbol con mayor altura se convierte en subárbol del otro.
-void Particion::unir(int a, int b)
+void Particion::unir(unsigned int a, unsigned int b)
 {
    if (padre[b] < padre[a])
       padre[a] = b;
@@ -20,9 +20,9 @@ void Particion::unir(int a, int b)
    }
 }
 
-int Particion::encontrar(int x) const
+unsigned int Particion::encontrar(unsigned int x) const
 {
-   int y, raiz = x;
+   unsigned int y, raiz = x;
 
    while (padre[raiz] > -1)
       raiz = padre[raiz];
