@@ -13,7 +13,9 @@ public:
 };
 
 template<typename tCoste>
-matriz<tCoste> costesMinimosEntreCiudades(size_t N, const std::vector<coordenadas>& ciudades, const Grafo& carreteras)
+matriz<tCoste> costesMinimosEntreCiudades(size_t N,
+                                          const std::vector<coordenadas>& ciudades,
+                                          const Grafo& carreteras)
 {
     typedef typename Grafo::vertice vertice;
 
@@ -27,7 +29,8 @@ matriz<tCoste> costesMinimosEntreCiudades(size_t N, const std::vector<coordenada
         {
             if(carreteras[i][j])
             {
-                costesDirectos[i][j] = sqrt(pow(ciudades[i].x - ciudades[j].x, 2) + pow(ciudades[i].y - ciudades[j].y, 2));
+                costesDirectos[i][j] = sqrt(pow(ciudades[i].x - ciudades[j].x, 2) +
+                                            pow(ciudades[i].y - ciudades[j].y, 2));
             }
         }
     }
@@ -40,7 +43,8 @@ matriz<tCoste> costesMinimosEntreCiudades(size_t N, const std::vector<coordenada
         {
             unsigned int representanteI = islas.encontrar(i);
             unsigned int representanteJ = islas.encontrar(j);
-            if(costesMinimos[i][j] != GrafoP<tCoste>::INFINITO && representanteI != representanteJ)
+            if( costesMinimos[i][j] != GrafoP<tCoste>::INFINITO &&
+                representanteI != representanteJ)
             {
                 islas.unir(representanteI, representanteJ);
             }
