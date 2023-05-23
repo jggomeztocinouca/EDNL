@@ -69,3 +69,14 @@ std::vector<aerolinea<tCoste>> aerolineasNecesarias(size_t N,
 
     return aerolineas;
 }
+
+// para todo i j
+// si i !=j
+// a = encontrar()
+// b = encontrar()
+// si a != b
+// vector de representantes (numIslas)
+// rep to nisla
+// si coste[i][j] > distancia --> sustituyo
+
+// alternativa --> usar APO

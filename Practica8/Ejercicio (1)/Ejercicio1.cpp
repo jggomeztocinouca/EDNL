@@ -53,3 +53,13 @@ matriz<tCoste> costesMinimosEntreCiudades(size_t N,
 
     return costesMinimos;
 }
+
+// particion p
+// Vn
+// for i = 1 to n
+// for j = 1 to n
+// si adj[i][j]
+// a = encontrar()
+// b = encontrar()
+// si a != b
+// unir(a,b)
