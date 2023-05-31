@@ -3,6 +3,13 @@
 
 using namespace std;
 
+// ¿estos viajes como pueden hacerse? ¿solo en tren? ¿solo en autobus? ¿en ambos?
+// 4 maneras:
+// 1. solo en tren
+// 2. solo en autobus
+// 3. en tren y autobus
+// 4. en bus y tren
+
 template<typename tCoste>
 matriz<tCoste> tarifaMinima(typename GrafoP<tCoste>::vertice ciudadTransbordo, const GrafoP<tCoste>& tren, const GrafoP<tCoste>& autobus)
 {

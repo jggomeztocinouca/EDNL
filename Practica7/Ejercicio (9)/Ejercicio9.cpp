@@ -3,7 +3,7 @@
 
 using namespace std;
 
-template<typename tCoste>
+/*template<typename tCoste>
 tCoste tarifaMinima(typename GrafoP<tCoste>::vertice origen, typename GrafoP<tCoste>::vertice destino, size_t costeTaxi, const GrafoP<tCoste>& tren, const GrafoP<tCoste>& bus)
 {
     typedef typename GrafoP<tCoste>::vertice vertice;
@@ -34,4 +34,4 @@ tCoste tarifaMinima(typename GrafoP<tCoste>::vertice origen, typename GrafoP<tCo
         }
     }
     return min(costeDirecto,costeCombinado);
-}
+}*/

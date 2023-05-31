@@ -22,8 +22,16 @@ public:
     tCoste distancia;
 };
 
+// Paso 1: Identificar las islas y sus ciudades --> Partición
+// Paso 2: Calcular las distancias entre las ciudades que no son de la misma isla.
+// Paso 3: Identificar las menores distancias entre cada par de islas.
+// Paso 4: Crear una aerolinea entre cada par de ciudades en distintas islas con menor distancia.
+
+
 template<typename tCoste>
-std::vector<aerolinea<tCoste>> aerolineasNecesarias(size_t N, const std::vector<coordenadas>& ciudades, const Grafo& carreteras)
+std::vector<aerolinea<tCoste>> aerolineasNecesarias(size_t N,
+                                                    const std::vector<coordenadas>& ciudades,
+                                                    const Grafo& carreteras)
 {
     matriz<bool> caminos = Warshall(carreteras);
 
@@ -41,7 +49,8 @@ std::vector<aerolinea<tCoste>> aerolineasNecesarias(size_t N, const std::vector<
         {
             if(!caminos[i][j])
             {
-                costesEntreIslas[i][j] = sqrt(pow(ciudades[i].x - ciudades[j].x, 2) + pow(ciudades[i].y - ciudades[j].y, 2));
+                costesEntreIslas[i][j] = sqrt(  pow(ciudades[i].x - ciudades[j].x, 2) +
+                                                pow(ciudades[i].y - ciudades[j].y, 2));
             }
             else
             {
