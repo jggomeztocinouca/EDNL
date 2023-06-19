@@ -15,6 +15,7 @@
 #include <grafoPMC.h>
 #include <grafoMA.h>
 #include <alg_grafoPMC.h>
+#include <cmath>
 
 struct lineaAerea{
     typedef typename Grafo::vertice vertice;
@@ -22,9 +23,55 @@ struct lineaAerea{
     vertice ciudad2;
 };
 
+struct coordenadas{
+    int x;
+    int y;
+};
+
+double distanciaEuclidea(coordenadas coordenada1, coordenadas coordenada2)
+{
+    return sqrt(pow(coordenada1.x - coordenada2.x, 2) +
+                pow(coordenada1.y - coordenada2.y, 2));
+}
+
 template<typename tCoste>
-vector<lineaAerea> aerolineasTombuctu(const Grafo& conexionesDirectas)
+vector<lineaAerea> aerolineasTombuctu(const vector<coordenadas>& coordenadasCiudad,
+                                      const Grafo& conexionesDirectas)
 {
     size_t numCiudades = conexionesDirectas.numVert();
+    typedef typename Grafo::vertice vertice;
+
+    Particion p(numCiudades);
+
+    for(vertice i = 0; i < numCiudades; i++)
+    {
+        for(vertice j = 0; j < numCiudades; j++)
+        {
+            if(conexionesDirectas[i][j])
+            {
+                unsigned representanteI = p.encontrar(i);
+                unsigned representanteJ = p.encontrar(j);
+                if(representanteI != representanteJ)
+                {
+                    p.unir(representanteI,representanteJ);
+                }
+            }
+        }
+    }
+
+
+    GrafoP<tCoste> GAux(numCiudades);
+    for(vertice i = 0; i < numCiudades; i++)
+    {
+        for(vertice j = 0; j < numCiudades; j++)
+        {
+            if(p.encontrar(i) != p.encontrar(j))
+            {
+                GAux[i][j] = distanciaEuclidea(coordenadasCiudad[i],coordenadasCiudad[j]);
+            }
+        }
+    }
+
+
 
 }
